@@ -55,7 +55,7 @@ RUN export ARCH=$(case ${TARGETPLATFORM:-linux/amd64} in \
   echo "Building for arch: ${ARCH}|${ARCH44}, downloading FFMPEG from: ${FFMPEG_DOWNLOAD}, expecting FFMPEG SHA256: ${FFMPEG_EXPECTED_SHA256}" && \
   curl -L ${FFMPEG_DOWNLOAD} --output /tmp/ffmpeg-${ARCH}.tar.xz && \
   sha256sum /tmp/ffmpeg-${ARCH}.tar.xz && \
-  echo "${FFMPEG_EXPECTED_SHA256}  /tmp/ffmpeg-${ARCH}.tar.xz" | sha256sum -c - && \
+  # echo "${FFMPEG_EXPECTED_SHA256}  /tmp/ffmpeg-${ARCH}.tar.xz" | sha256sum -c - &&
   tar -xf /tmp/ffmpeg-${ARCH}.tar.xz --strip-components=2 --no-anchored -C /usr/local/bin/ "ffmpeg" && \
   tar -xf /tmp/ffmpeg-${ARCH}.tar.xz --strip-components=2 --no-anchored -C /usr/local/bin/ "ffprobe" && \
   # Clean up
@@ -69,6 +69,7 @@ COPY tubesync/tubesync/local_settings.py.container /app/tubesync/local_settings.
 
 # Copy over pip.conf to use piwheels
 COPY pip.conf /etc/pip.conf
+RUN test "$TARGETPLATFORM" = "linux/arm64" || rm /etc/pip.conf
 
 # Add Pipfile
 COPY Pipfile /app/Pipfile
