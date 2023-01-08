@@ -307,7 +307,7 @@ class Source(models.Model):
         max_length=8,
         db_index=True,
         choices=SOURCE_VCODEC_CHOICES,
-        default=SOURCE_VCODEC_VP9,
+        default=SOURCE_VCODEC_AVC1,
         help_text=_('Source video codec, desired video encoding format to download (ignored if "resolution" is audio only)')
     )
     source_acodec = models.CharField(
@@ -315,7 +315,7 @@ class Source(models.Model):
         max_length=8,
         db_index=True,
         choices=SOURCE_ACODEC_CHOICES,
-        default=SOURCE_ACODEC_OPUS,
+        default=SOURCE_ACODEC_MP4A,
         help_text=_('Source audio codec, desired audio encoding format to download')
     )
     prefer_60fps = models.BooleanField(
