@@ -30,26 +30,26 @@
       <a href="{% url 'sync:media-item' pk=m.pk %}" title="{{ m.source.name }} / {{ m.name }}">
         <div class="card-image">
           <img src="{% if m.thumb %}{% url 'sync:media-thumb' pk=m.pk %}{% else %}{% static 'images/nothumb.png' %}{% endif %}">
-          <span class="card-title truncate">{{ m.source }}<br>
-            <span>{{ m.name }}</span><br>
+          <span class="card-title truncate">{{ m.name }}<br>
             <span>
             {% if m.downloaded %}
-              <i class="fas fa-check-circle" title="Downloaded"></i> {{ m.download_date|date:'Y-m-d' }}
+              <i class="fas fa-check-circle" title="Downloaded"></i>
             {% else %}
               {% if m.manual_skip %}
               <span class="error-text"><i class="fas fa-times" title="Skipping media"></i> Manually skipped</span>
               {% elif m.skip %}
               <span class="error-text"><i class="fas fa-times" title="Skipping media"></i> Skipped by system</span>
               {% elif not m.source.download_media %}
-              <span class="error-text"><i class="fas fa-times" title="Not downloading media for this source"></i> Disabled at source</span>
+              <span class="error-text"><i class="fas fa-times" title="Not downloading media for this source"></i></span>
               {% elif not m.has_metadata %}
-              <i class="far fa-clock" title="Waiting for metadata"></i> Fetching metadata
+              <i class="far fa-clock" title="Waiting for metadata"></i>
               {% elif m.can_download %}
-              <i class="far fa-clock" title="Waiting to download or downloading"></i> Downloading
+              <i class="far fa-clock" title="Waiting to download or downloading"></i>
               {% else %}
-              <span class="error-text"><i class="fas fa-exclamation-triangle" title="No matching formats to download"></i> No matching formats</span>
+              <span class="error-text"><i class="fas fa-exclamation-triangle" title="No matching formats to download"></i></span>
               {% endif %}
             {% endif %}
+            {{ m.source.name }}
             </span>
           </span>
         </div>
