@@ -20,6 +20,6 @@ requests = "*"
 django-basicauth = "*"
 psycopg2-binary = "*"
 mysqlclient = "*"
-yt-dlp = "*"
+yt-dlp = { git = 'https://github.com/yt-dlp/yt-dlp.git', ref = 'master', editable = true }
 redis = "*"
 hiredis = "*"
